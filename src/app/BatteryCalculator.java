@@ -23,7 +23,7 @@ public class BatteryCalculator {
     public double calcPredictedLife(int dayLife){
         try{
             if(dayLife <= 0){
-                JOptionPane.showMessageDialog(null, "Battery life must have decreased during the day");
+                JOptionPane.showMessageDialog(null, "Battery life can not increase during the day.");
                 return -1;
             }
             else{

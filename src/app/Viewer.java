@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 
 public class Viewer{
@@ -56,7 +57,7 @@ public class Viewer{
         int dayLife = 0;
         dayLife = batCalc.calcDayLife(start, end);
         double predictedLife = batCalc.calcPredictedLife(dayLife);
-        JOptionPane.showMessageDialog(null, dayLife+"% consumed today.\nPredicted total battery life " + predictedLife + " days.");
+        JOptionPane.showMessageDialog(null, dayLife+"% consumed today.\nPredicted total battery life " + new DecimalFormat("#.##").format(predictedLife) + " days.");
 
     }
 }
