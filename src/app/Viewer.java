@@ -37,14 +37,19 @@ public class Viewer{
         JButton submit = new JButton("Save");
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                int startLife = Integer.parseInt(startPercent.getText());
-                int endLife = Integer.parseInt(endPercent.getText());
-                calculator(startLife, endLife);
-                try{
-                    DataRecorder.recordNewEntry(startLife, endLife);
+                if(startPercent.getText().equals("") || endPercent.getText().equals("")){
+                    JOptionPane.showMessageDialog(null, "Both fields must contain a value!");
                 }
-                catch(Exception exception){
-                    JOptionPane.showMessageDialog(null, exception+" exception occurred.");
+                else{
+                    int startLife = Integer.parseInt(startPercent.getText());
+                    int endLife = Integer.parseInt(endPercent.getText());
+                    calculator(startLife, endLife);
+                    try{
+                        DataRecorder.recordNewEntry(startLife, endLife);
+                    }
+                    catch(Exception exception){
+                        JOptionPane.showMessageDialog(null, exception+" exception occurred.");
+                    }
                 }
             }
         });
