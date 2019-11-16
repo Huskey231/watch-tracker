@@ -38,7 +38,10 @@ public class Viewer{
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 if(startPercent.getText().equals("") || endPercent.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Both fields must contain a value!");
+                    JOptionPane.showMessageDialog(null, "Both fields must contain a value!", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                }
+                else if(Integer.parseInt(startPercent.getText()) < Integer.parseInt(endPercent.getText())){
+                    JOptionPane.showMessageDialog(null, "Recording of charging is not currently supported.", "Charging Error", JOptionPane.WARNING_MESSAGE);
                 }
                 else{
                     int startLife = Integer.parseInt(startPercent.getText());
