@@ -35,8 +35,8 @@ class DataRecorder{
                     File batteryDataNew = new File("src\\data\\BatteryData.txt");
                     FileWriter fw = new FileWriter(batteryDataNew);
                     System.out.println("Point 3");// Hits
-                    for(int i = 1; i < oldData.length; i++){
-                        fw.write(oldData[i]);
+                    for(int i = 1; i < 30; i++){
+                        fw.write(oldData[i] + "\n");
                     }
                     fw.write(start-end+"d"+" "+end+"e\n");
                     fw.close();
