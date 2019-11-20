@@ -1,8 +1,10 @@
 package app;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import javax.swing.JOptionPane;
+import java.io.FileReader;
 
 
 class DataRecorder{
@@ -20,9 +22,31 @@ class DataRecorder{
             }
         }
         else{
-            FileWriter fw = new FileWriter(batteryData, true);
-            fw.write(start-end+"d"+" "+end+"e\n");
-            fw.close();
+            BufferedReader reader = new BufferedReader(new FileReader("src\\data\\BatteryData.txt"));
+            String[] oldData = new String[35];
+            int lineCount = 0;
+            String line;
+
+            while((line = reader.readLine()) != null && lineCount <= 30){
+                oldData[lineCount] = line;
+                lineCount++;
+            }
+            if(lineCount == 30){
+                    File batteryDataNew = new File("src\\data\\BatteryData.txt");
+                    FileWriter fw = new FileWriter(batteryDataNew);
+                    System.out.println("Point 3");// Hits
+                    for(int i = 1; i < oldData.length; i++){
+                        fw.write(oldData[i]);
+                    }
+                    fw.write(start-end+"d"+" "+end+"e\n");
+                    fw.close();
+                    reader.close();
+            }
+            else{
+                FileWriter fw = new FileWriter(batteryData, true);
+                fw.write(start-end+"d"+" "+end+"e\n");
+                fw.close();
+            }
         }
     }
 }

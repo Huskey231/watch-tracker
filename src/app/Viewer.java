@@ -51,7 +51,7 @@ public class Viewer{
                         DataRecorder.recordNewEntry(startLife, endLife);
                     }
                     catch(Exception exception){
-                        JOptionPane.showMessageDialog(null, exception+" exception occurred.");
+                        JOptionPane.showMessageDialog(null, exception+" occurred.");
                     }
                 }
             }
