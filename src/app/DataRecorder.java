@@ -3,6 +3,7 @@ package app;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import java.io.FileReader;
 
@@ -23,24 +24,29 @@ class DataRecorder{
         }
         else{
             BufferedReader reader = new BufferedReader(new FileReader("src\\data\\BatteryData.txt"));
-            String[] oldData = new String[35];
-            int lineCount = 0;
+            LinkedList<String> oldData = new LinkedList<String>();
             String line;
 
-            while((line = reader.readLine()) != null && lineCount <= 30){
-                oldData[lineCount] = line;
-                lineCount++;
+            while((line = reader.readLine()) != null){
+                oldData.add(line);
             }
-            if(lineCount == 30){
-                    File batteryDataNew = new File("src\\data\\BatteryData.txt");
-                    FileWriter fw = new FileWriter(batteryDataNew);
-                    System.out.println("Point 3");// Hits
-                    for(int i = 1; i < 30; i++){
-                        fw.write(oldData[i] + "\n");
-                    }
-                    fw.write(start-end+"d"+" "+end+"e\n");
-                    fw.close();
-                    reader.close();
+            if(oldData.size() == 30){
+                File batteryDataNew = new File("src\\data\\BatteryData.txt");
+                FileWriter fw = new FileWriter(batteryDataNew);
+                oldData.remove();
+                for(String data : oldData){
+                    fw.write(data + "\n");
+                }
+                fw.write(start-end+"d"+" "+end+"e\n");
+                fw.close();
+                reader.close();
+            }
+            else if(oldData.size() > 30){
+                JOptionPane.showMessageDialog(null, "Data error exists in file. Purging old data and \ncreating new file with entered data.", "Data Error", JOptionPane.WARNING_MESSAGE);
+                File batteryDataNew = new File("src\\data\\BatteryData.txt");
+                FileWriter fw = new FileWriter(batteryDataNew);
+                fw.write(start-end+"d"+" "+end+"e\n");
+                fw.close();
             }
             else{
                 FileWriter fw = new FileWriter(batteryData, true);
